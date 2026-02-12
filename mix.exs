@@ -9,6 +9,10 @@ defmodule JidoAi.MixProject do
     [
       app: :jido_ai,
       version: @version,
+      build_path: "../../_build",
+      config_path: "../../config/config.exs",
+      deps_path: "../../deps",
+      lockfile: "../../mix.lock",
       elixir: "~> 1.17",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
@@ -60,9 +64,10 @@ defmodule JidoAi.MixProject do
   defp deps do
     [
       # Jido ecosystem
-      {:jido, "~> 2.0.0-rc.4"},
+      {:jido, in_umbrella: true},
       {:req_llm, "~> 1.5"},
-      {:jido_browser, github: "agentjido/jido_browser", branch: "main"},
+      # jido_browser disabled in umbrella — its hex jido dep conflicts with in-tree jido
+      # {:jido_browser, github: "agentjido/jido_browser", branch: "main"},
 
       # Runtime
       {:fsmx, "~> 0.5"},
